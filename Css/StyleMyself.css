@@ -1,0 +1,19 @@
+.clearfix{
+    clear: both;
+}
+/**** Start genarell ****/
+/**** Start Content ****/
+#content {
+    float: left;
+}
+
+.header {
+    background: blue
+}
+/**** End Content ****/
+
+/**** Start Right side ****/
+#rightSide {
+    float: right;
+}
+/**** End Right side ****/

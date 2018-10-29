@@ -1,0 +1,32 @@
+
+body {
+    background: wheat
+}
+.header {
+    display: block;
+    overflow: visible;
+    word-wrap: break-word;
+}
+.header-address {
+    float: right;
+}
+.header-information {
+    float: left
+}
+.clearfix{
+    clear: both;
+}
+/**** Start genarell ****/
+/**** Start Content ****/
+#content {
+    float: left;
+}
+
+
+/**** End Content ****/
+
+/**** Start Right side ****/
+#rightSide {
+    float: right;
+}
+/**** End Right side ****/
