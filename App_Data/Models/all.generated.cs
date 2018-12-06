@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "74f747a9fbe205f6")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "857e8f6535abbcd5")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.5")]
 
 
 // FILE: models.generated.cs
@@ -98,6 +98,33 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Tra, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Địa chỉ
+		///</summary>
+		[ImplementPropertyType("diaChi")]
+		public string DiaChi
+		{
+			get { return this.GetPropertyValue<string>("diaChi"); }
+		}
+
+		///<summary>
+		/// Gallery
+		///</summary>
+		[ImplementPropertyType("gallery")]
+		public IEnumerable<IPublishedContent> Gallery
+		{
+			get { return this.GetPropertyValue<IEnumerable<IPublishedContent>>("gallery"); }
+		}
+
+		///<summary>
+		/// Số điện thoại
+		///</summary>
+		[ImplementPropertyType("soDienThoai")]
+		public string SoDienThoai
+		{
+			get { return this.GetPropertyValue<string>("soDienThoai"); }
 		}
 	}
 
