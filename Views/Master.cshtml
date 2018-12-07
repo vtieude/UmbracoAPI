@@ -9,7 +9,9 @@
     var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
     var pages = currentNode.Children;
     var homepage= Model.Content.AncestorsOrSelf(1).FirstOrDefault();
-    var galleryArray = homepage.GetPropertyValue<string>("gallery").Split(new Char[]{','}, StringSplitOptions.RemoveEmptyEntries);
+    <!-- var galleryArray = homepage.GetPropertyValue<string>("gallery").Split(new Char[]{','}, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse); -->
+   
+    
 }
 <html>
     <head>
@@ -105,30 +107,24 @@
                             /*#endregion responsive code end*/
                         };
                     </script>
-                    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;visibility:hidden;">
+                    <div id="jssor_1" style="position:relative;margin:0 auto;top:50px;left:-12px;width:1300px;height:500px;overflow:hidden;visibility:hidden;">
                         <!-- Loading Screen -->
                         <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
                             <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/loading/static-svg/spin.svg" />
                         </div>
                         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">
-                            @foreach (var item in galleryArray)
-                            {
-                                var image = Umbraco.TypedMedia(item);
-                                var url = String.Empty;
-                                if (image != null) {
-                                    url = image.Url;
+                            @{
+                                 if (homepage.HasValue("gallery")){
+                                    var caseStudyImagesList = homepage.GetPropertyValue<string>("gallery").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
+                                    var caseStudyImagesCollection = Umbraco.TypedMedia(caseStudyImagesList).Where(x => x != null);
+                                    foreach (var item in caseStudyImagesCollection)
+                                        {
+                                            <div>
+                                                <img data-u="image" src="@item.Url" />
+                                            </div>
+                                        }
                                 }
-                                 <div>
-                                    <img data-u="image" src="@url" />
-                                </div>
                             }
-                           
-                            <div>
-                                <img data-u="image" src="../images/dogo.jpg" />
-                            </div>
-                            <div>
-                                <img data-u="image" src="../images/dogo.jpg" />
-                            </div>
                         </div>
                         <!-- Bullet Navigator -->
                         <div data-u="navigator" class="jssorb032" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
@@ -187,7 +183,6 @@
                                     <li><a href="kitchen.html">Kitchen</a></li>
                                     <li><a href="pet.html">Pet Food</a></li>
                                     <li><a href="bread.html">Bread &amp; Bakery</a></li>
-                                    <li>@galleryArray</li>
                                     <li class="menu_services">Sản Phẩm Mới</li>
                                     <li>
                                         <img src="/images/dogo.jpg" />
