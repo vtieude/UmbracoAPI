@@ -1,0 +1,187 @@
+
+/* Dropdown Button */
+.dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color:white;} 
+@foreach (var item in selection)
+        {
+             string active = (item.Name == currentNode.Name ? "active": "");
+            
+            if (item.GetPropertyValue<bool>("danhMucCon")) {
+                <li class="dropdown">
+                    <a class="dropbtn" href="@item.Url">@item.Name</a>
+                    <div class="dropdown-content" >
+                        @{
+                            var subItem = item.Children;
+                            foreach(var newItem in subItem) {
+                                <a href="@newItem.Url">@newItem.Name</a>
+                            }
+                        }
+                    </div> 
+                </li>
+            }
+            else {
+                <li class="@active menu_navigation @(item.IsAncestorOrSelf(Model.Content) ? "current" : null)">
+                    <a href="@item.Url">@item.Name</a>
+                </li>
+            }
+        }
+
+https://our.umbraco.com/documentation/getting-started/backoffice/property-editors/built-in-property-editors/
+$(function() {
+	
+	&(".tabButton).each(function(){
+		&(this).click(function() {
+			&(".tabButton).removeClass("current"");
+			&("#projectDetail").html($(this).siblings(".tabContent").html());
+			&(this).addClass("current");
+		});
+	});
+});
+
+@{
+	var rootNode = Umbraco.TypedContentAtRoot();
+	var duanHot = rootNode.DescendantsOrSelf("duanItem").Where(x=>x.GetPropertyValue<bool>("duanHot");
+}
+
+
+
+<a class="tabButton current" href="javascript:void(0)"></a>
+<div class="tabContent"> </div>
+
+<a class="tabButton></a>
+<div class="tabContent"> </div>
+<div id="projectDetail"></div>
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "Master.cshtml";
+}
+@{
+	var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
+	var products = currentNode.Children;
+	const int pageSize = 3;
+	int page = 1;
+	if (!int.TryParse(Request["page"], out page)) {
+		page =1;
+	}
+	int titalNode = products.Count();
+	int totalPages = (int) Math.Ceiling((double) titalNode / pageSize);
+	if (page > totalPages) {
+		page = totalPages;
+	}
+	else if (page < 1) {
+		page = 1;
+	}
+	var listItem = products.Skip((page -1) * pageSize).Take(pageSize).ToList();
+	<!-- var rootNode = Umbraco.TypedContentAtRoot(); -->
+	<!-- var galleryArray = currentNode.GetPropertyValue<string>("gallery").Split(new char[]{',', StringSplitOptions.RemoveEmptyEntries});
+	foreach(var id in galleryArray) {
+		var image = Umbraco.TypedMedia(id);
+		var url = string.Empty;
+		url = image.Url;
+
+		// lay gallery
+	}	 -->
+	<!-- var otherNews = currentNode.Siblings().Where(x => x.Id != currentNode.Id).Take(6)
+		lay cac node cung cap voi node hien tai	
+	 -->
+	<!-- @Html.Raw(variable) format html for string -->
+}
+ <div class="category_header">
+	<href="javascript:void(0);" title="D? án m?i nh?t">
+		<h2> D? án</h2>
+		<span></span>
+</div>
+<div id="project row">
+	<div class=" col-xs-12 col-sm-12 col-md-12 .col-lg-12">
+			<ul class="items">
+				@foreach (var item in listItem) {
+					var thumbnail = Umbraco.TypedMedia(item.GetPropertyValue<int>("thumbnail"));
+					var url = String.Empty;
+					if (thumbnail != null) {
+						url = thumbnail.Url;
+					}
+					<!-- @products.IndexOf(item) %AccessViolationException 3 == 1 ? "center" : "" -->
+				<div class="col-xs-4 col-sm-4 col-md-4 .col-lg-4">
+					<li>
+						<div class="thumbnail">
+							<a href="@item.Url"><img src="@url" /></a>
+						</div>
+						<div class="clearfix"></div>
+						<div class="title">
+							<a href="@item.Url"> @item.Name</a>
+						</div>
+						<div class="address">Ð?a ch?: @(item.GetPropertyValue<string>("diaChi"))</div>
+						<div class="price">Giá:  @(item.GetPropertyValue<string>("gia"))</div>
+					</li>
+				</div>
+				}
+			</ul>
+	</div>
+	<div class="clearfix"></div>
+	@if (totalPages > 1) {
+		const int itemsPerGroup = 8;
+		var currentGroup = (int) Math.Ceiling((double)page / itemsPerGroup);
+		int startItem = (currentGroup -1) * itemsPerGroup;
+		int endItem = startItem + itemsPerGroup;
+		if (endItem > totalPages) {
+			endItem = totalPages;
+		}
+		<div id="pagingWrapper">
+			<ul class="paging">
+				@if (page > 1) {
+					<li class="number"><a href="?page=@(page-1)" title="@(page-1)"><<</a></li>
+				}
+				@for (int p = startItem; p < endItem; p++ ) {
+					string selected = (p + 1 ==page)? "selected" : String.Empty;
+					if (selected.Trim().Length != 0) {
+						<li class="number @selected"> <a href="javascript:void(0);" title="@(p+1)">@(p+1)</a> </li>
+					}
+					else {
+						<li class="number @selected"> <a href="?page=@(p+1)" title="@(p+1)">@(p+1)</a></li>
+					}
+				}
+				@if (page < totalPages) {
+					<li class="number"> <a href="?page=@(page+1)" title="@(page+1)">>></a> </li>
+				}
+			</ul>
+		</div>
+	}
+</div>
