@@ -21,10 +21,33 @@
         }
         @foreach (var item in selection)
         {
-             string active = (item.Name == currentNode.Name ? "active": "");
-            <li class="@active menu_navigation @(item.IsAncestorOrSelf(Model.Content) ? "current" : null)">
-                <a href="@item.Url">@item.Name</a>
-            </li>
+            string active = (item.Name == currentNode.Name ? "active": "");
+            if(item.Children.Count() > 0) {
+                var subItem = item.Children;
+                foreach(var newItem in subItem) {
+                    if ( currentNode != homepage) {
+                        if (currentNode.Parent.Id == item.Id) {
+                            active = "active";
+                            break;
+                        }
+                    }
+                }
+                 <li class="dropdown @active">
+                    <a class="dropbtn" href="@item.Url">@item.Name</a>
+                    <div class="dropdown-content" >
+                        @{
+                            foreach(var newItem in subItem) {
+                                <a href="@newItem.Url">@newItem.Name</a>
+                            }
+                        }
+                    </div> 
+                </li>
+            }
+            else {
+                <li class="@active menu_navigation @(item.IsAncestorOrSelf(Model.Content) ? "current" : null)">
+                    <a href="@item.Url">@item.Name</a>
+                </li>
+            }
         }
     </ul>
 }
