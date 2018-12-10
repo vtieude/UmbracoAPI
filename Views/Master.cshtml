@@ -168,22 +168,38 @@
                             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                                 <ul class="nav navbar-nav nav_1">
                                     <li class="menu_services">Dịch Vụ</li>
-                                    <li><a href="products.html">Branded Foods</a></li>
-                                    <li><a href="household.html">Households</a></li>
-                                    <li><a href="kitchen.html">Kitchen</a></li>
-                                    <li><a href="pet.html">Pet Food</a></li>
-                                    <li><a href="bread.html">Bread &amp; Bakery</a></li>
-                                     <li><a href="products.html">Branded Foods</a></li>
-                                    <li><a href="household.html">Households</a></li>
-                                    <li><a href="kitchen.html">Kitchen</a></li>
-                                    <li><a href="pet.html">Pet Food</a></li>
-                                    <li><a href="bread.html">Bread &amp; Bakery</a></li>
-                                     <li><a href="products.html">Branded Foods</a></li>
-                                    <li><a href="household.html">Households</a></li>
-                                    <li><a href="kitchen.html">Kitchen</a></li>
-                                    <li><a href="pet.html">Pet Food</a></li>
-                                    <li><a href="bread.html">Bread &amp; Bakery</a></li>
+                                    @{
+                                        foreach(var page in pages) {
+                                            if (page.Name == "Dịch Vụ") {
+                                                var serviceItem = page.Children;
+                                                foreach(var item in serviceItem) {
+                                                    <li><a href="javascript:void(0)">@item.Name</a></li>
+                                                }
+                                            }
+                                        }
+                                    }
                                     <li class="menu_services">Sản Phẩm Mới</li>
+                                    @{
+                                        foreach(var page in pages) {
+                                            if (page.Name == "Sản Phẩm") {
+                                                var productItem = page.Children;
+                                                foreach(var item in productItem) {
+                                                    if (item.GetPropertyValue<bool>("moi"){
+                                                        var images = item.GetPropertyValue<int>("hinhAnh");
+                                                        var image = Umbraco.TypedMedia(images);
+                                                        var url = String.Empty;
+                                                        if (image != null) {
+                                                            url = image.Url;
+                                                        }
+                                                        <li>
+                                                            <img src="@url" />
+                                                            <a class="detail" href="@item.Url">Xem thêm</a>
+                                                        </li> 
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                     <li>
                                         <img src="/images/dogo.jpg" />
                                         <a class="detail" href="/">Xem thêm</a>
