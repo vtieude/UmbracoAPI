@@ -2,8 +2,21 @@
 @{
 	Layout = "Master.cshtml";
 	var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
-	var products = currentNode.Children;
-	
+	var productsNode = currentNode.Children.FirstOrDefault(x => x.Name == "Sản phẩm");
+	const int pageSize = 4;
+	int page = 1;
+	if (!int.TryParse(Request["page"], out page)) {
+		page =1;
+	}
+	int titalNode = productsNode.Children.Count();
+	int totalPages = (int) Math.Ceiling((double) titalNode / pageSize);
+	if (page > totalPages) {
+		page = totalPages;
+	}
+	else if (page < 1) {
+		page = 1;
+	}
+	var listItem = productsNode.Children.Skip((page -1) * pageSize).Take(pageSize).ToList();
 }
 
 @* the fun starts here *@
@@ -12,170 +25,71 @@
 	<h3><i>Hotline: @(currentNode.GetPropertyValue<string>("sodienThoai"))</i></h3>
 	<h3><i>Địa Chỉ: @(currentNode.GetPropertyValue<string>("diaChi"))</i></h3><br>
 	<p>@Html.Raw(currentNode.GetPropertyValue<string>("noiDung"))</p>
+	<!-- List products -->
 	<div class="products">
 		<h2 class="heading text-center">Danh mục sản phẩm</h2>
 		<div class="row">
-			@foreach( var page in products) {
-				if (page.Name == "Sản phẩm") {
-					var sanpham = page.Children;
-					foreach(var sanphamitem in sanpham){
-						var images = sanphamitem.GetPropertyValue<int>("hinhAnh");
-						var image = Umbraco.TypedMedia(images);
-						var url = String.Empty;
-						if (image != null) {
-							url = image.Url;
-						}
-						<div class="col-md-3 col-sm-6">
-							<div class="box-image-text blog">
-								<div class="top">
-									<div class="image">
-										<a href="@sanphamitem.Url"><img src="@url" alt="@(sanphamitem.GetPropertyValue<string>("tittle"))" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="content">
-									<h4><a href="@sanphamitem.Url">@(sanphamitem.GetPropertyValue<string>("tittle"))</a></h4>
-									<p class="author-category">Sản xuất tại cơ sở Tấn Cường
-									</p>
-									<p class="intro">@(sanphamitem.GetPropertyValue<string>("moTa"))</p>
-									<p class="price">Giá: @(sanphamitem.GetPropertyValue<string>("gia"))</p>
-									<p class="read-more"><a href="@sanphamitem.Url" class="btn btn-template-main">Xem thêm</a>
-									</p>
+			@if (listItem != null) {
+				foreach( var sanphamitem in listItem) {
+					var images = sanphamitem.GetPropertyValue<int>("hinhAnh");
+					var image = Umbraco.TypedMedia(images);
+					var url = String.Empty;
+					if (image != null) {
+						url = image.Url;
+					}
+					<div class="col-md-3 col-sm-6">
+						<div class="box-image-text blog">
+							<div class="top">
+								<div class="image">
+									<a href="@sanphamitem.Url"><img src="@url" alt="@(sanphamitem.GetPropertyValue<string>("tittle"))" class="img-responsive"></a>
 								</div>
 							</div>
+							<div class="content">
+								<h4><a href="@sanphamitem.Url">@(sanphamitem.GetPropertyValue<string>("tittle"))</a></h4>
+								<p class="author-category">Sản xuất tại cơ sở Tấn Cường
+								</p>
+								<p class="intro">@(sanphamitem.GetPropertyValue<string>("moTa"))</p>
+								<p class="price">Giá: @(sanphamitem.GetPropertyValue<string>("gia"))</p>
+								<p class="read-more"><a href="@sanphamitem.Url" class="btn btn-template-main">Xem thêm</a>
+								</p>
+							</div>
 						</div>
-						if ((sanpham.IndexOf(sanphamitem) == 3 ) || (sanpham.IndexOf(sanphamitem) == 7 )){
-							<div class="clearfix"></div>
-						}
+					</div>
+					if ((listItem.IndexOf(sanphamitem) == 3 ) || (listItem.IndexOf(sanphamitem) == 7 )){
+						<div class="clearfix"></div>
 					}
 				}
 			}
-			<!-- /.box-image-text -->
-			<div class="col-md-3 col-sm-6">
-				<div class="box-image-text blog">
-					<div class="top">
-						<div class="image">
-							<img src="/images/featured1.jpg" alt="" class="img-responsive">
-						</div>
-					</div>
-					<div class="content">
-						<h4><a href="blog-post.html">Fashion now</a></h4>
-						<p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-						</p>
-						<p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
-						<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-						</p>
-					</div>
-				</div>
-				<!-- /.box-image-text -->
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-image-text blog">
-					<div class="top">
-						<div class="image">
-							<img src="/images/featured1.jpg" alt="" class="img-responsive">
-						</div>
-					</div>
-					<div class="content">
-						<h4><a href="blog-post.html">Fashion now</a></h4>
-						<p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-						</p>
-						<p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
-						<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-						</p>
-					</div>
-				</div>
-				<!-- /.box-image-text -->
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-image-text blog">
-					<div class="top">
-						<div class="image">
-							<img src="/images/featured1.jpg" alt="" class="img-responsive">
-						</div>
-					</div>
-					<div class="content">
-						<h4><a href="blog-post.html">Fashion now</a></h4>
-						<p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-						</p>
-						<p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
-						<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-						</p>
-					</div>
-				</div>
-				<!-- /.box-image-text -->
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-image-text blog">
-					<div class="top">
-						<div class="image">
-							<img src="/images/featured1.jpg" alt="" class="img-responsive">
-						</div>
-					</div>
-					<div class="content">
-						<h4><a href="blog-post.html">Fashion now</a></h4>
-						<p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-						</p>
-						<p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
-						<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-						</p>
-					</div>
-				</div>
-				<!-- /.box-image-text -->
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-image-text blog">
-					<div class="top">
-						<div class="image">
-							<img src="/images/featured1.jpg" alt="" class="img-responsive">
-						</div>
-					</div>
-					<div class="content">
-						<h4><a href="blog-post.html">Fashion now</a></h4>
-						<p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-						</p>
-						<p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
-						<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-						</p>
-					</div>
-				</div>
-				<!-- /.box-image-text -->
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-image-text blog">
-					<div class="top">
-						<div class="image">
-							<img src="/images/featured1.jpg" alt="" class="img-responsive">
-						</div>
-					</div>
-					<div class="content">
-						<h4><a href="blog-post.html">Fashion now</a></h4>
-						<p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-						</p>
-						<p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
-						<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-						</p>
-					</div>
-				</div>
-				<!-- /.box-image-text -->
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="box-image-text blog">
-					<div class="top">
-						<div class="image">
-							<img src="/images/featured1.jpg" alt="" class="img-responsive">
-						</div>
-					</div>
-					<div class="content">
-						<h4><a href="blog-post.html">Fashion now</a></h4>
-						<p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-						</p>
-						<p class="intro">Fifth abundantly made Give sixth hath. Cattle creature i be don't them behold green moved fowl Moved life us beast good yielding. Have bring.</p>
-						<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-						</p>
-					</div>
-				</div>
-				<!-- /.box-image-text -->
-			</div>
 		</div>
 	</div>
+	<!-- End list products -->
+	<div class="clearfix"></div>
+	@if (totalPages > 1) {
+		const int itemsPerGroup = 8;
+		var currentGroup = (int) Math.Ceiling((double)page / itemsPerGroup);
+		int startItem = (currentGroup -1) * itemsPerGroup;
+		int endItem = startItem + itemsPerGroup;
+		if (endItem > totalPages) {
+			endItem = totalPages;
+		}
+		<div id="pagingWrapper">
+			<ul class="paging">
+				@if (page > 1) {
+					<li class="number"><a href="?page=@(page-1)" title="@(page-1)"><<</a></li>
+				}
+				@for (int p = startItem; p < endItem; p++ ) {
+					string selected = (p + 1 ==page)? "selected" : String.Empty;
+					if (selected.Trim().Length != 0) {
+						<li class="number @selected"> <a href="javascript:void(0);" title="@(p+1)">@(p+1)</a> </li>
+					}
+					else {
+						<li class="number @selected"> <a href="?page=@(p+1)" title="@(p+1)">@(p+1)</a></li>
+					}
+				}
+				@if (page < totalPages) {
+					<li class="number"> <a href="?page=@(page+1)" title="@(page+1)">>></a> </li>
+				}
+			</ul>
+		</div>
+	}
 </div>

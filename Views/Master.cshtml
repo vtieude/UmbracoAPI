@@ -170,33 +170,31 @@
                                 <ul class="nav navbar-nav nav_1">
                                     <li class="menu_services">Dịch Vụ</li>
                                     @{
-                                        foreach(var page in pages) {
-                                            if (page.Name == "Dịch Vụ") {
-                                                var serviceItem = page.Children;
-                                                foreach(var item in serviceItem) {
-                                                    <li><a href="javascript:void(0)">@item.Name</a></li>
-                                                }
+                                        var servicesNode = homepage.Children.FirstOrDefault(x => x.Name == "Dịch Vụ");
+                                        if (servicesNode != null) {
+                                            var serviceItem = servicesNode.Children;
+                                            foreach(var item in serviceItem) {
+                                                <li><a href="javascript:void(0)">@item.Name</a></li>
                                             }
                                         }
                                     }
                                     <li class="menu_services">Sản Phẩm Mới</li>
                                     @{
-                                        foreach(var page in pages) {
-                                            if (page.Name == "Sản phẩm") {
-                                                var productItem = page.Children;
-                                                foreach(var item in productItem) {
-                                                    if (item.GetPropertyValue<bool>("moi")){
-                                                        var images = item.GetPropertyValue<int>("hinhAnh");
-                                                        var image = Umbraco.TypedMedia(images);
-                                                        var url = String.Empty;
-                                                        if (image != null) {
-                                                            url = image.Url;
-                                                        }
-                                                        <li>
-                                                            <img src="@url" />
-                                                            <a class="detail" href="@item.Url">Xem thêm</a>
-                                                        </li> 
+                                        var productsNode = homepage.Children.FirstOrDefault(x => x.Name == "Sản phẩm");
+                                        if (productsNode != null) {
+                                            var productItem = productsNode.Children;
+                                            foreach(var item in productItem) {
+                                                if (item.GetPropertyValue<bool>("moi")){
+                                                    var images = item.GetPropertyValue<int>("hinhAnh");
+                                                    var image = Umbraco.TypedMedia(images);
+                                                    var url = String.Empty;
+                                                    if (image != null) {
+                                                        url = image.Url;
                                                     }
+                                                    <li>
+                                                        <img src="@url" />
+                                                        <a class="detail" href="@item.Url">Xem thêm</a>
+                                                    </li> 
                                                 }
                                             }
                                         }
