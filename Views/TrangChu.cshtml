@@ -21,11 +21,14 @@
 
 @* the fun starts here *@
  <div class="heading text-center w3l_banner_nav_right">
-	<h2><b>Cơ sở Mộc Mỹ Nghệ Tấn Cường</b></h2>
-	<h3><i>Hotline: @(currentNode.GetPropertyValue<string>("sodienThoai"))</i></h3>
-	<h3><i>Địa Chỉ: @(currentNode.GetPropertyValue<string>("diaChi"))</i></h3><br>
-	<p>@Html.Raw(currentNode.GetPropertyValue<string>("noiDung"))</p>
+	 <div class="home_info">
+		<h2><b>Cơ sở Mộc Mỹ Nghệ Tấn Cường</b></h2>
+		<h3><i>Hotline: @(currentNode.GetPropertyValue<string>("sodienThoai"))</i></h3>
+		<h3><i>Địa Chỉ: @(currentNode.GetPropertyValue<string>("diaChi"))</i></h3><br>
+		<p>@Html.Raw(currentNode.GetPropertyValue<string>("noiDung"))</p>
+	 </div>
 	<!-- List products -->
+	<div class="line_bottom"></div>
 	<div class="products">
 		<h2 class="heading text-center">Danh mục sản phẩm</h2>
 		<div class="row">
@@ -37,7 +40,7 @@
 					if (image != null) {
 						url = image.Url;
 					}
-					<div class="col-md-3 col-sm-6">
+					<div class="col-md-3 col-sm-6 product_item">
 						<div class="box-image-text blog">
 							<div class="top">
 								<div class="image">
@@ -92,4 +95,5 @@
 			</ul>
 		</div>
 	}
+	<div class="line_bottom"></div>
 </div>

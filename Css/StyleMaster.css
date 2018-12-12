@@ -20,6 +20,9 @@ body {
 .header-information {
     float: left
 }
+.line_bottom {
+    border-bottom: 1px solid #f8ceaf;
+}
 .clearfix{
     clear: both;
 }
@@ -27,7 +30,7 @@ body {
 /**** Start Content ****/
 #content {
     margin-top: 70px;
-    background-color: white;
+    background-color: #f4f5fa;
     padding-left: 0px !important;
     line-height: 1.42857143;
 }
@@ -98,6 +101,10 @@ body {
 .w3l_banner_nav_right {
     float: right;
     width: 80%;
+    background-color: white;
+}
+.w3l_banner_nav_right .home_info {
+    margin: 5px;
 }
 .w3l_banner_nav_right #pagingWrapper ul li{
     list-style: none;
@@ -105,7 +112,7 @@ body {
 }
 .heading {
     margin-bottom: 40px;
-    margin-top: 40px;
+    margin-top: 0px;
 }
 .heading h2 {
     display: inline-block;
@@ -128,6 +135,21 @@ body {
 }
 .heading h3 {
     color: #0000ff;
+}
+
+.w3l_banner_nav_right .product_item .content {
+    background-color: #eaf8d2;
+    color: 333;
+}
+
+.w3l_banner_nav_right .product_item .content h4 {
+    margin-top: 5px;
+}
+.w3l_banner_nav_right .product_item .content h4 a {
+    margin-top: 5px;
+}
+.w3l_banner_nav_right .product_item .content p {
+    margin: 0 0 5px;
 }
 .text-center {
     text-align: center;
