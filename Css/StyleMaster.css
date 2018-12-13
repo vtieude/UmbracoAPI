@@ -34,6 +34,9 @@ body {
     padding-left: 0px !important;
     line-height: 1.42857143;
 }
+.content-info {
+    background-color: white;
+}
 .w3l_banner_nav_left {
     float: left;
     width: 20%;
@@ -307,3 +310,6 @@ body {
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color:white;} 
   
+
+  /* Page products */
+  /* End page products */

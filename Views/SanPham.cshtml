@@ -1,6 +1,13 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
 	Layout = "Master.cshtml";
+	var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
 }
 
 @* the fun starts here *@
+<div class="pageProducts">
+	<div class="label-page-header">
+		<h1 class="label-page-header-tittle">DANH SÁCH SẢN PHẨM</h1>
+		<hr class="label-page-header-dotted-line">
+	</div>
+</div>
