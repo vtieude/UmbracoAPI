@@ -109,6 +109,46 @@ body {
 .w3l_banner_nav_right #pagingWrapper ul li{
     list-style: none;
     display: inline;
+    display: inline-block;
+    margin: 0 2px;
+    text-align: -webkit-match-parent;
+}
+.w3l_banner_nav_right .paging{
+    display: flex;
+    padding-left: 0px;
+    border-radius: 0.25rem;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.w3l_banner_nav_right .paging .selected .pgLnk{
+    background: #d2577e;
+    border-color: #d2577e;
+    color: #fff!important;
+}
+.w3l_banner_nav_right .paging ul{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.w3l_banner_nav_right .paging .pgLnk:hover {
+    color: #d2577e;
+}
+.w3l_banner_nav_right .paging .pgLnk {
+    position: relative;
+    display: block;
+    padding: 0;
+    margin-left: -1px;
+    color: #757575;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 28px;
+    height: 28px;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 27px;
+    border-radius: 0;
 }
 .heading {
     margin-bottom: 40px;
@@ -141,7 +181,7 @@ body {
     background-color: #eaf8d2;
     color: 333;
 }
-
+    
 .w3l_banner_nav_right .product_item .content h4 {
     margin-top: 5px;
 }
@@ -266,3 +306,4 @@ body {
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color:white;} 
+  

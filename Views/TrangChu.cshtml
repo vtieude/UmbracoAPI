@@ -76,23 +76,26 @@
 			endItem = totalPages;
 		}
 		<div id="pagingWrapper">
-			<ul class="paging">
+			<nav>
+				<ul class="paging">
 				@if (page > 1) {
-					<li class="number"><a href="?page=@(page-1)" title="@(page-1)"><<</a></li>
+					<li class="number"><a class="pgLnk" href="?page=@(page-1)" title="@(page-1)"><<</a></li>
 				}
 				@for (int p = startItem; p < endItem; p++ ) {
 					string selected = (p + 1 ==page)? "selected" : String.Empty;
 					if (selected.Trim().Length != 0) {
-						<li class="number @selected"> <a href="javascript:void(0);" title="@(p+1)">@(p+1)</a> </li>
+						<li class="number @selected"> <a href="javascript:void(0);" title="@(p+1)"><span class="pgLnk">@(p+1)</span></a> </li>
 					}
 					else {
-						<li class="number @selected"> <a href="?page=@(p+1)" title="@(p+1)">@(p+1)</a></li>
+						<li class="number @selected"> <a href="?page=@(p+1)" title="@(p+1)"><span class="pgLnk">@(p+1)</span></a></li>
 					}
 				}
 				@if (page < totalPages) {
-					<li class="number"> <a href="?page=@(page+1)" title="@(page+1)">>></a> </li>
+					<li class="number"> <a class="pgLnk" href="?page=@(page+1)" title="@(page+1)">>></a> </li>
 				}
 			</ul>
+			</nav>
+			
 		</div>
 	}
 	<div class="line_bottom"></div>
