@@ -5,9 +5,45 @@
 }
 
 @* the fun starts here *@
-<div class="pageProducts">
+<div class="pageProducts heading text-center w3l_banner_nav_right" id="w3l_banner_nav_right">
 	<div class="label-page-header">
 		<h1 class="label-page-header-tittle">DANH SÁCH SẢN PHẨM</h1>
 		<hr class="label-page-header-dotted-line">
+	</div>
+	<div class="page-products row">
+		<div class="col-md-12 col-sm-12">
+			@{
+				foreach(var product in currentNode.Children.Take(8).ToList()) {
+					var images = product.GetPropertyValue<int>("hinhAnh");
+					var image = Umbraco.TypedMedia(images);
+					var url = String.Empty;
+					if (image != null) {
+						url = image.Url;
+					}
+					<div class="col-md-6">
+						<article class="page-products-content">
+							<header>
+								<h3>
+									<span class="page-products-postname">
+										<a  href="@product.Url">@(product.GetPropertyValue<string>("tittle"))</a>
+									</span>
+								</h3>
+							</header>
+							<a href="@product.Url"><img class="page-products-image" src="@url"></a>
+							<div class="page-products-detail">
+								<p><span>@(product.GetPropertyValue<string>("moTa"))</span></p>
+								<p><span class="page-products-price">Giá: @(product.GetPropertyValue<string>("gia")) </span></p>
+							</div>
+						</article>
+					</div>
+					if ((currentNode.Children.IndexOf(product) % 2 == 1 && currentNode.Children.IndexOf(product) != 0 )){
+						<div class="clearfix"></div>
+					}
+				}
+			}
+		</div>
+		<div>
+			<a onclick="" href="javascript:void(0)" class="header-more">Xem thêm</a>
+		</div>
 	</div>
 </div>

@@ -8,6 +8,10 @@ body {
     overflow: visible;
     word-wrap: break-word;
 }
+.nav-text {
+    margin-top: 60px;
+    margin-bottom: 10px;
+}
 .active {
     background-color: #e7e7e7;
 }
@@ -20,6 +24,14 @@ body {
 .header-information {
     float: left
 }
+.stick {
+    position:fixed;
+    top:70px;
+}
+.image-new-products {
+    width: 150px;
+    height: 98px;
+}
 .line_bottom {
     border-bottom: 1px solid #f8ceaf;
 }
@@ -29,7 +41,6 @@ body {
 /**** Start genarell ****/
 /**** Start Content ****/
 #content {
-    margin-top: 70px;
     background-color: #f4f5fa;
     padding-left: 0px !important;
     line-height: 1.42857143;
@@ -311,5 +322,4 @@ body {
   .dropdown:hover .dropbtn {background-color:white;} 
   
 
-  /* Page products */
-  /* End page products */
+  

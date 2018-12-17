@@ -149,13 +149,40 @@
                         </div>
                     </div>
                     <script type="text/javascript">jssor_1_slider_init();</script>
+                   
                 </div>
                 
                 <!-- #endregion Jssor Slider End -->
             <!-- Item slider end-->
             <!-- content -->
+                <div class="container nav-text">
+                    @{
+                        var rootPage = homepage;
+                        var allPublishedContent = new List<IPublishedContent>();
+                        while(rootPage != currentNode) {
+                            allPublishedContent.Add(currentNode);
+                            currentNode = currentNode.Parent;
+                        }
+                        allPublishedContent.Add(homepage);
+                        while (allPublishedContent.Count > 0) {
+                            var count = allPublishedContent.Count;
+                            string url = "";
+                            string name = "";
+                            if (count != 1) {
+                                url = allPublishedContent.LastOrDefault().Url;
+                                name =  " > ";
+                            }
+                            else {
+                                url = "javascript:void(0)";
+                            }
+                            <a href="@url">@allPublishedContent.LastOrDefault().Name</a><span>@name</span>
+                            allPublishedContent.Remove(allPublishedContent.LastOrDefault());
+                        }
+                        
+                    }
+                </div>
                 <section id="content" class="container bar background-white no-mb">
-                    <div class="w3l_banner_nav_left">
+                    <nav class="w3l_banner_nav_left .navbar-fixed-left" id="w3l_banner_nav_left">
                         <nav class="navbar nav_bottom">
                             <!-- Brand and toggle get grouped for better mobile display -->
                             <div class="navbar-header nav_2">
@@ -184,18 +211,23 @@
                                         var productsNode = homepage.Children.FirstOrDefault(x => x.Name == "Sản phẩm");
                                         if (productsNode != null) {
                                             var productItem = productsNode.Children;
+                                            var count = 0;
                                             foreach(var item in productItem) {
                                                 if (item.GetPropertyValue<bool>("moi")){
+                                                    count++;
                                                     var images = item.GetPropertyValue<int>("hinhAnh");
                                                     var image = Umbraco.TypedMedia(images);
                                                     var url = String.Empty;
                                                     if (image != null) {
                                                         url = image.Url;
                                                     }
+                                                    if (count < 5) {
                                                     <li>
                                                         <img src="@url" />
                                                         <a class="detail" href="@item.Url">Xem thêm</a>
                                                     </li> 
+                                                    }
+                                                    
                                                 }
                                             }
                                         }
@@ -203,7 +235,7 @@
                                 </ul>
                                 </div><!-- /.navbar-collapse -->
                         </nav>
-                    </div>
+                    </nav>
                     <div class="content-info">
                         @RenderBody()
                     </div>
@@ -230,7 +262,7 @@
                                 Lời kết:
                                 </p>
                             <p class="detail_footer">
-                                Cơ sở Mộc Mỹ Nghệ Cao Cấp Tấn Cường xin chân thành cảm ơn quý khách hàng đã tin tưởng và sử dụng sản Phẩm
+                                Cơ sở Mộc Mỹ Nghệ Cao Cấp Tấn Cường xin chân thành cảm ơn quý khách hàng đã tin tưởng và sử dụng sản phẩm
                             của chúng tôi cung cấp trong thời gian qua. Kính chúc quý khách luôn gặp nhiều may mắn và thành đạt.
                             </p>
                         </div>
@@ -253,5 +285,12 @@
                 </div>
             <!-- End footer -->
         </div>
+        <!-- <script>
+            var divLeft = $('#w3l_banner_nav_left');
+            var heightLeft = divLeft.height();
+            var divRight = $('#w3l_banner_nav_right');
+            divRight.css('height', heightLeft);
+            window.alert('ds');
+        </script> -->
     </body>
 </html>

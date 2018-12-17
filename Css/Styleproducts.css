@@ -2,4 +2,51 @@
 .pageProducts {
     background: white;
 }
+.label-page-header-tittle {
+    text-align: center;
+}
+.page-products-content {
+    margin-bottom: 25px;
+    overflow: hidden;
+    display: block;
+    text-align: left;
+}
+.page-products-content h3 {
+    margin: 0px;
+}
+.page-products-postname {
+    display: block;
+    color: #333;
+    padding: 0 0 5px;
+    margin: 0;
+    font-weight: bold;
+    font-weight: 600;
+    height: 40px;
+    overflow: hidden;
+}
+.page-products-postname a {
+    color: #333;
+    font-size: 17px;
+}
+.page-products-image {
+    width: 200px;
+    height: 150px;
+    float: left;
+    margin-right: 10px;
+    display: block;
+    position: relative;
+}
+.page-products-detail {
+    line-height: 18px;
+    font-size: 13px;
+    display: block;
+    color: #333;
+    
+}
+.page-products-price {
+    position: absolute;
+}
+.click_more_products {
+    height: 0px;
+}
   /* End page products */

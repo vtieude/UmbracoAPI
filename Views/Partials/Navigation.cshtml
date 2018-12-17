@@ -22,8 +22,9 @@
         @foreach (var item in selection)
         {
             string active = (item.Name == currentNode.Name ? "active": "");
+            bool checkShowMore = false;
             if(item.Children.Count() > 0) {
-                var subItem = item.Children;
+                var subItem = item.Children.Take(6).ToList();
                 foreach(var newItem in subItem) {
                     if ( currentNode != homepage) {
                         if (currentNode.Parent.Id == item.Id) {
@@ -39,9 +40,14 @@
                             foreach(var newItem in subItem) {
                                 <a href="@newItem.Url">@newItem.Name</a>
                             }
+                            if (item.Children.Count() > 6 && !checkShowMore) {
+                                checkShowMore = true;
+                                <a href="@item.Url">Xem tất cả</a>
+                            }
                         }
                     </div> 
                 </li>
+                
             }
             else {
                 <li class="@active menu_navigation @(item.IsAncestorOrSelf(Model.Content) ? "current" : null)">

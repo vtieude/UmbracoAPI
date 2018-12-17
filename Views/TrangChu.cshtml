@@ -8,8 +8,8 @@
 	if (!int.TryParse(Request["page"], out page)) {
 		page =1;
 	}
-	int titalNode = productsNode.Children.Count();
-	int totalPages = (int) Math.Ceiling((double) titalNode / pageSize);
+	int totalNode = productsNode.Children.Count();
+	int totalPages = (int) Math.Ceiling((double) totalNode / pageSize);
 	if (page > totalPages) {
 		page = totalPages;
 	}
@@ -20,7 +20,7 @@
 }
 
 @* the fun starts here *@
- <div class="heading text-center w3l_banner_nav_right">
+ <div class="heading text-center w3l_banner_nav_right" id="w3l_banner_nav_right">
 	 <div class="home_info">
 		<h2><b>Cơ sở Mộc Mỹ Nghệ Tấn Cường</b></h2>
 		<h3><i>Hotline: @(currentNode.GetPropertyValue<string>("sodienThoai"))</i></h3>
@@ -79,7 +79,7 @@
 			<nav>
 				<ul class="paging">
 				@if (page > 1) {
-					<li class="number"><a class="pgLnk" href="?page=@(page-1)" title="@(page-1)"><<</a></li>
+					<li class="number"><a class="pgLnk" href="?page=1" title="@(page-1)"><<</a></li>
 				}
 				@for (int p = startItem; p < endItem; p++ ) {
 					string selected = (p + 1 ==page)? "selected" : String.Empty;
@@ -91,7 +91,7 @@
 					}
 				}
 				@if (page < totalPages) {
-					<li class="number"> <a class="pgLnk" href="?page=@(page+1)" title="@(page+1)">>></a> </li>
+					<li class="number"> <a class="pgLnk" href="?page=@(totalPages)" title="@(page+1)">>></a> </li>
 				}
 			</ul>
 			</nav>
@@ -99,4 +99,7 @@
 		</div>
 	}
 	<div class="line_bottom"></div>
+	<script>
+
+	</script>
 </div>
