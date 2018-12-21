@@ -24,30 +24,53 @@
             string active = (item.Name == currentNode.Name ? "active": "");
             bool checkShowMore = false;
             if(item.Children.Count() > 0) {
-                var subItem = item.Children.Take(6).ToList();
-                foreach(var newItem in subItem) {
-                    if ( currentNode != homepage) {
-                        if (currentNode.Parent.Id == item.Id) {
-                            active = "active";
-                            break;
+                if (item.Name == "Dịch Vụ") {
+                    var subItem = item.Children;
+                    foreach(var newItem in subItem) {
+                        if ( currentNode != homepage) {
+                            if (currentNode.Parent.Id == item.Id) {
+                                active = "active";
+                                break;
+                            }
                         }
                     }
-                }
-                 <li class="dropdown @active">
-                    <a class="dropbtn" href="@item.Url">@item.Name</a>
-                    <div class="dropdown-content" >
-                        @{
-                            foreach(var newItem in subItem) {
-                                <a href="@newItem.Url">@newItem.Name</a>
+                    <li class="dropdown @active">
+                        <a class="dropbtn" href="@item.Url">@item.Name</a>
+                        <div class="dropdown-content" >
+                            @{
+                                foreach(var newItem in subItem) {
+                                    <a href="javascript:void(0)">@newItem.Name</a>
+                                }
                             }
-                            if (item.Children.Count() > 6 && !checkShowMore) {
-                                checkShowMore = true;
-                                <a href="@item.Url">Xem tất cả</a>
+                        </div> 
+                    </li>
+                }
+                else {
+
+                    var subItem = item.Children.Take(6).ToList();
+                    foreach(var newItem in subItem) {
+                        if ( currentNode != homepage) {
+                            if (currentNode.Parent.Id == item.Id) {
+                                active = "active";
+                                break;
                             }
                         }
-                    </div> 
-                </li>
-                
+                    }
+                    <li class="dropdown @active">
+                        <a class="dropbtn" href="@item.Url">@item.Name</a>
+                        <div class="dropdown-content" >
+                            @{
+                                foreach(var newItem in subItem) {
+                                    <a href="@newItem.Url">@newItem.Name</a>
+                                }
+                                if (item.Children.Count() > 6 && !checkShowMore) {
+                                    checkShowMore = true;
+                                    <a href="@item.Url">Xem tất cả</a>
+                                }
+                            }
+                        </div> 
+                    </li>
+                }
             }
             else {
                 <li class="@active menu_navigation @(item.IsAncestorOrSelf(Model.Content) ? "current" : null)">

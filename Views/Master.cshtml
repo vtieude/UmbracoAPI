@@ -23,6 +23,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="/js/jssor.slider.min.js" type="text/javascript"></script>
         <script src="/js/ScriptMaster.js" type="text/javascript"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="/Css/StyleMaster.css" rel="stylesheet" type="text/css" media="all" />
         <link href="/Css/Styleproducts.css" rel="stylesheet" type="text/css" media="all" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -181,70 +183,83 @@
                         
                     }
                 </div>
-                <section id="content" class="container bar background-white no-mb">
-                    <nav class="w3l_banner_nav_left .navbar-fixed-left" id="w3l_banner_nav_left">
-                        <nav class="navbar nav_bottom">
-                            <!-- Brand and toggle get grouped for better mobile display -->
-                            <div class="navbar-header nav_2">
-                                <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                </button>
-                            </div> 
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-                                <ul class="nav navbar-nav nav_1">
-                                    <li class="menu_services">Dịch Vụ</li>
-                                    @{
-                                        var servicesNode = homepage.Children.FirstOrDefault(x => x.Name == "Dịch Vụ");
-                                        if (servicesNode != null) {
-                                            var serviceItem = servicesNode.Children;
-                                            foreach(var item in serviceItem) {
-                                                <li><a href="javascript:void(0)">@item.Name</a></li>
-                                            }
-                                        }
-                                    }
-                                    <li class="menu_services">Sản Phẩm Mới</li>
-                                    @{
-                                        var productsNode = homepage.Children.FirstOrDefault(x => x.Name == "Sản phẩm");
-                                        if (productsNode != null) {
-                                            var productItem = productsNode.Children;
-                                            var count = 0;
-                                            foreach(var item in productItem) {
-                                                if (item.GetPropertyValue<bool>("moi")){
-                                                    count++;
-                                                    var images = item.GetPropertyValue<int>("hinhAnh");
-                                                    var image = Umbraco.TypedMedia(images);
-                                                    var url = String.Empty;
-                                                    if (image != null) {
-                                                        url = image.Url;
-                                                    }
-                                                    if (count < 5) {
-                                                    <li>
-                                                        <img src="@url" />
-                                                        <a class="detail" href="@item.Url">Xem thêm</a>
-                                                    </li> 
-                                                    }
-                                                    
+                <section id="content" class="container contentofpage bar background-white no-mb">
+                    <div class="w3l_banner_nav_left .navbar-fixed-left">
+                        <nav  id="w3l_banner_nav_left">
+                            <nav class="navbar nav_bottom">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header nav_2">
+                                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    </button>
+                                </div> 
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                                    <ul class="nav navbar-nav nav_1" id="rootnavul">
+                                        <li class="menu_services">Dịch Vụ</li>
+                                        @{
+                                            var servicesNode = homepage.Children.FirstOrDefault(x => x.Name == "Dịch Vụ");
+                                            if (servicesNode != null) {
+                                                var serviceItem = servicesNode.Children;
+                                                foreach(var item in serviceItem) {
+                                                    <li><a href="javascript:void(0)">@item.Name</a></li>
                                                 }
                                             }
                                         }
-                                    }
-                                </ul>
-                                </div><!-- /.navbar-collapse -->
+                                    </ul>
+                                    <ul class="nav navbar-nav nav_1 nav-products-fixed">
+                                        <li class="menu_services">Sản Phẩm Mới</li>
+                                        @{
+                                            var productsNode = homepage.Children.FirstOrDefault(x => x.Name == "Sản phẩm");
+                                            if (productsNode != null) {
+                                                var productItem = productsNode.Children;
+                                                var count = 0;
+                                                foreach(var item in productItem) {
+                                                    if (item.GetPropertyValue<bool>("moi")){
+                                                        count++;
+                                                        var images = item.GetPropertyValue<int>("hinhAnh");
+                                                        var image = Umbraco.TypedMedia(images);
+                                                        var url = String.Empty;
+                                                        if (image != null) {
+                                                            url = image.Url;
+                                                        }
+                                                        if (count < 5) {
+                                                        <li>
+                                                            <a class="image-product-nav" href="@item.Url"><img class="nav-menu-products-image" src="@url" /></a>
+                                                            <a class="detail" href="@item.Url">Xem thêm</a>
+                                                        </li> 
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </ul>
+                                    </div><!-- /.navbar-collapse -->
+                            </nav>
                         </nav>
-                    </nav>
+                    </div>
                     <div class="content-info">
                         @RenderBody()
                     </div>
                 </section>
+                <div class="clear-fix"></div>
             <!-- Endcontent -->
             <!-- Slider for news -->
             <!-- End slider for news -->
+            <div id="map" class="map_content container">
+                <div class="map-free-size"></div>
+                <div class="map-content-size">
+                    <iframe class="map_frame" src="https://map.coccoc.com/map/16959344321417582"
+                    frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="clear-fix"></div>
             <!-- Footer -->
-                <footer id="footer">
+                <footer id="footer" class="footer_content">
                     <div class="row">
                         <div class="col-md-6 col-mb-4">
                             <p class="header_footer">
@@ -279,12 +294,56 @@
                     </div>
                    
                 </footer>
-                <div id="map">
-                    <iframe class="map_frame" src="https://map.coccoc.com/map/16959344321417582"
-                    frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>
+                
             <!-- End footer -->
         </div>
+        <script>
+            var fixmeTop = $('.nav-products-fixed').offset().top;
+            var bottom = $('.map_content').offset().top;
+            var widthNav = document.getElementById('rootnavul').offsetWidth;
+            $(window).scroll(function() {                  // assign scroll event listener
+                var currentScroll = $(window).scrollTop(); // get current position
+                if (currentScroll >= fixmeTop && currentScroll < bottom) {           // apply position: fixed if you
+                    var leftNav = $('.w3l_banner_nav_left').offset().left;
+                    
+                    /*$('.nav-products-fixed').css({                      // scroll to that element or below it
+                        position: 'fixed',
+                        top: '0',
+                        left: '0'
+                    });
+                } else {                                   // apply position: static
+                    $('.nav-products-fixed').css({                      // if you scroll above it
+                        position: 'static'
+                    }); */
+
+                    $('.nav-products-fixed').addClass('style-products-image');
+                    $('.style-products-image').css({                      // scroll to that element or below it
+                        left: leftNav,
+                        width: widthNav
+                    });
+                     $('.map-free-size').css({                      // scroll to that element or below it
+                        width: '20%',
+                        float: 'left',
+
+                    });
+                     $('.map-content-size').css({                      // scroll to that element or below it
+                        width: '80%',
+                        float: 'right',
+                    });
+                }
+                else {
+                    $('.nav-products-fixed').removeClass('style-products-image');
+                     $('.map-free-size').css({                      // scroll to that element or below it
+                        width: '0',
+
+                    });
+                     $('.map-content-size').css({                      // scroll to that element or below it
+                        width: '100%',
+                    });
+                }
+            });
+            
+        </script>
         <!-- <script>
             var divLeft = $('#w3l_banner_nav_left');
             var heightLeft = divLeft.height();

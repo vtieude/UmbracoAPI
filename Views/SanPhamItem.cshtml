@@ -4,12 +4,42 @@
 	Layout = "Master.cshtml";
 }
 <div class="w3l_banner_nav_right products-items">
-	<div class="items-product-image">
-		<img src="/images/dogo.jpg" width="400" height="300"/>
+	<div class="carousel slide article-slide" id="article-photo-carousel">
+	<!-- Wrapper for slides -->
+		<div class="carousel-inner cont-slider">
+
+			<div class="item active">
+				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400" />
+			</div>
+			<div class="item">
+				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400"  />
+			</div>
+			<div class="item">
+				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400"  />
+			</div>
+			<div class="item">
+				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400" />
+			</div>
+		</div>
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li class="active" data-slide-to="0" data-target="#article-photo-carousel">
+				<img class="mySlides" src="/images/dogo.jpg" width="250" height="180" />
+			</li>
+			<li class="" data-slide-to="1" data-target="#article-photo-carousel">
+				<img class="mySlides" src="/images/dogo.jpg" width="250" height="180"/>
+			</li>
+			<li class="" data-slide-to="2" data-target="#article-photo-carousel">
+				<img class="mySlides" src="/images/dogo.jpg" width="250" height="180"/>
+			</li>
+			<li class="" data-slide-to="3" data-target="#article-photo-carousel">
+				<img class="mySlides" src="/images/dogo.jpg" width="250" height="180" />
+			</li>
+		</ol>
 	</div>
 	<div class="items-products-content">
 		<div class="items-product-title">
-			<p>Đồ gõ hàng chính hiệu</p>
+			<p>Đồ gỗ hàng chính hiệu</p>
 		</div>
 		<div class="items-products-detail">
 			<p>Mô tả</p>
