@@ -319,7 +319,10 @@
                     $('.nav-products-fixed').addClass('style-products-image');
                     $('.style-products-image').css({                      // scroll to that element or below it
                         left: leftNav,
-                        width: widthNav
+                        width: '15%',
+                    });
+                    $('.menu_services').css({                      // scroll to that element or below it
+                        'font-size':'25',
                     });
                      $('.map-free-size').css({                      // scroll to that element or below it
                         width: '20%',
@@ -332,7 +335,13 @@
                     });
                 }
                 else {
+                     $('.menu_services').css({                      // scroll to that element or below it
+                        'font-size':'30',
+                    });
                     $('.nav-products-fixed').removeClass('style-products-image');
+                     $('.nav-products-fixed').css({                      // scroll to that element or below it
+                        width: 'auto',
+                    });
                      $('.map-free-size').css({                      // scroll to that element or below it
                         width: '0',
 

@@ -2,52 +2,104 @@
 @using ContentModels = Umbraco.Web.PublishedContentModels;
 @{
 	Layout = "Master.cshtml";
+	var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
+	var homepage= Model.Content.AncestorsOrSelf(1).FirstOrDefault();
 }
 <div class="w3l_banner_nav_right products-items">
-	<div class="products-item-header">
-		<h3>Tên tiêu đề của sản phẩm</h3>
-	</div>
-	<div class="carousel slide article-slide item-products-carousel" id="article-photo-carousel">
-	<!-- Wrapper for slides -->
-		<div class="carousel-inner cont-slider">
-
-			<div class="item active">
-				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400" />
+	<div class="products-items-content-page">
+		<div class="products-item-header">
+			<h3>@(currentNode.GetPropertyValue<string>("tittle"))</h3>
+		</div>
+		<div class="carousel slide article-slide item-products-carousel" id="article-photo-carousel">
+		<!-- Wrapper for slides -->
+			<div class="carousel-inner cont-slider">
+				@{
+					if (currentNode.HasValue("Images")){
+					var caseStudyImagesList = currentNode.GetPropertyValue<string>("images").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
+					var caseStudyImagesCollection = Umbraco.TypedMedia(caseStudyImagesList).Where(x => x != null);
+					var checkFirstItem = true;
+					string active = "";
+					foreach (var item in caseStudyImagesCollection)
+						{
+							active = checkFirstItem? "active": "";
+							checkFirstItem = false;
+							<div class="item @active">
+								<img class="mySlides" data-u="image" src="@item.Url" width="600" height="400" />
+							</div>
+						}
+					}
+				}
+				<!-- <div class="item active">
+					<img class="mySlides" src="/images/dogo.jpg" width="600" height="400" />
+				</div>
+				<div class="item">
+					<img class="mySlides" src="/images/dogo.jpg" width="600" height="400"  />
+				</div>
+				<div class="item">
+					<img class="mySlides" src="/images/dogo.jpg" width="600" height="400"  />
+				</div>
+				<div class="item">
+					<img class="mySlides" src="/images/dogo.jpg" width="600" height="400" />
+				</div> -->
 			</div>
-			<div class="item">
-				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400"  />
-			</div>
-			<div class="item">
-				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400"  />
-			</div>
-			<div class="item">
-				<img class="mySlides" src="/images/dogo.jpg" width="600" height="400" />
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				@{
+					if (currentNode.HasValue("Images")){
+					var caseStudyImagesList = currentNode.GetPropertyValue<string>("images").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
+					var caseStudyImagesCollection = Umbraco.TypedMedia(caseStudyImagesList).Where(x => x != null);
+					var checkFirstItem = true;
+					string active = "";
+					int count = 0;
+					foreach (var item in caseStudyImagesCollection)
+						{
+							active = checkFirstItem? "active": "";
+							checkFirstItem = false;
+							<li class=" @active" data-slide-to="@count" data-target="#article-photo-carousel">
+								<img class="mySlides" data-u="image" src="@item.Url" width="100%" height="auto" />
+							</li>
+							count++;
+						}
+					}
+				}
+				<!-- <li class="active" data-slide-to="0" data-target="#article-photo-carousel">
+					<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto" />
+				</li>
+				<li class="" data-slide-to="1" data-target="#article-photo-carousel">
+					<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto"/>
+				</li>
+				<li class="" data-slide-to="2" data-target="#article-photo-carousel">
+					<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto"/>
+				</li>
+				<li class="" data-slide-to="3" data-target="#article-photo-carousel">
+					<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto" />
+				</li> -->
+			</ol>
+		</div>
+		<div class="items-products-content">
+			<div class="items-products-detail">
+				<p>@(currentNode.GetPropertyValue<string>("moTa"))</p>
+				<p>Giá: @(currentNode.GetPropertyValue<string>("gia"))</p>
+				<p>Liên hệ: @(homepage.GetPropertyValue<string>("soDienThoai"))</p>
 			</div>
 		</div>
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li class="active" data-slide-to="0" data-target="#article-photo-carousel">
-				<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto" />
-			</li>
-			<li class="" data-slide-to="1" data-target="#article-photo-carousel">
-				<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto"/>
-			</li>
-			<li class="" data-slide-to="2" data-target="#article-photo-carousel">
-				<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto"/>
-			</li>
-			<li class="" data-slide-to="3" data-target="#article-photo-carousel">
-				<img class="mySlides" src="/images/dogo.jpg" width="100%" height="auto" />
-			</li>
-		</ol>
 	</div>
-	<div class="items-products-content">
-		<div class="items-product-title">
-			<p>Đồ gỗ hàng chính hiệu</p>
-		</div>
-		<div class="items-products-detail">
-			<p>Mô tả</p>
-			<p>Giá: 3 000 000</p>
-			<p>Liên hệ: 0935.599.566</p>
+	<div class="clear-fix"></div>
+	<div class="products-another-items-content-page">
+		<h3 class="products-another-header">Các sản phẩm khác</h3>
+		<div class="products-another-content">
+			<div class="products-another-items">
+				<h3>San pham 1</h3>
+			</div>
+			<div class="products-another-items">
+				<h3>San pham 2</h3>
+			</div>
+			<div class="products-another-items">
+				<h3>San pham 3</h3>
+			</div>
+			<div class="products-another-items">
+				<h3>San pham 4</h3>
+			</div>
 		</div>
 	</div>
 </div>
