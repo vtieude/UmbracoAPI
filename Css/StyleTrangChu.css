@@ -1,0 +1,113 @@
+
+.w3l_banner_nav_right {
+    float: right;
+    width: 78%;
+    background-color: white;
+    border: 1px solid #e6b3b3;
+    margin-left: 5px;
+}
+.w3l_banner_nav_right .home_info {
+    margin: 5px;
+}
+.w3l_banner_nav_right #pagingWrapper ul li{
+    list-style: none;
+    display: inline;
+    display: inline-block;
+    margin: 0 2px;
+    text-align: -webkit-match-parent;
+}
+.w3l_banner_nav_right .paging{
+    display: flex;
+    padding-left: 0px;
+    border-radius: 0.25rem;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.w3l_banner_nav_right .paging .selected .pgLnk{
+    background: #d2577e;
+    border-color: #d2577e;
+    color: #fff!important;
+}
+.w3l_banner_nav_right .paging ul{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.w3l_banner_nav_right .paging .pgLnk:hover {
+    color: #d2577e;
+}
+.w3l_banner_nav_right .paging .pgLnk {
+    position: relative;
+    display: block;
+    padding: 0;
+    margin-left: -1px;
+    color: #757575;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 28px;
+    height: 28px;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 27px;
+    border-radius: 0;
+}
+.heading {
+    margin-bottom: 40px;
+    margin-top: 0px;
+}
+.heading h2 {
+    display: inline-block;
+    border-bottom: solid 5px #38a7bb;
+    line-height: 1.1;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-family: -webkit-pictograph;
+    font-weight: 900;
+    color:red;
+    font-size: 30px;
+    box-sizing: border-box;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.heading h3 {
+    color: #0000ff;
+}
+
+.w3l_banner_nav_right .product_item .content {
+    background-color: #eaf8d2;
+    color: 333;
+}
+    
+.w3l_banner_nav_right .product_item .content h4 {
+    margin-top: 5px;
+}
+.w3l_banner_nav_right .product_item .content h4 a {
+    margin-top: 5px;
+}
+.w3l_banner_nav_right .product_item .content p {
+    margin: 0 0 5px;
+}
+.w3l_banner_nav_right .background-header {
+    background-image: linear-gradient(#00cc00,#006600);
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    color: white;
+    margin-top: -5px;
+}
+.w3l_banner_nav_right .background-header .introduction {
+    line-height: 30px;
+    display: inline;
+}
+.w3l_banner_nav_right .background-header .glyphicon {
+    float: left;
+    margin-top: 5px;
+    margin-left: 5px;
+}

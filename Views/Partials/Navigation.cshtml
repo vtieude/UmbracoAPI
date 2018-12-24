@@ -34,12 +34,12 @@
                             }
                         }
                     }
-                    <li class="dropdown @active">
+                    <li class="dropdown @active ">
                         <a class="dropbtn" href="javascript:void(0)">@item.Name</a>
                         <div class="dropdown-content" >
                             @{
                                 foreach(var newItem in subItem) {
-                                    <a href="javascript:void(0)">@newItem.Name</a>
+                                    <a href="javascript:void(0)" class="root-nav-products">@newItem.Name</a>
                                 }
                             }
                         </div> 
