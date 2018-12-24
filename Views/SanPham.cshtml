@@ -30,7 +30,7 @@
 								</h3>
 							</header>
 							<div class="page-products-item">
-								<a href="@product.Url"><img class="page-products-image" src="@url"></a>
+								<a href="@product.Url"><img class="page-products-image lazy" data-src="@url"></a>
 								<div class="page-products-detail">
 									<p>@(product.GetPropertyValue<string>("moTa"))</p>
 									<p><span class="page-products-price text">Giá: @(product.GetPropertyValue<string>("gia")) </span></p>

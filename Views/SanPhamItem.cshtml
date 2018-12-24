@@ -24,7 +24,7 @@
 							active = checkFirstItem? "active": "";
 							checkFirstItem = false;
 							<div class="item @active">
-								<img class="mySlides" data-u="image" src="@item.Url" width="600" height="400" />
+								<img class="mySlides lazy" data-u="image" data-src="@item.Url" width="600" height="400" />
 							</div>
 						}
 					}
@@ -56,7 +56,7 @@
 							active = checkFirstItem? "active": "";
 							checkFirstItem = false;
 							<li class=" @active" data-slide-to="@count" data-target="#article-photo-carousel">
-								<img class="mySlides" data-u="image" src="@item.Url" width="100%" height="auto" />
+								<img class="mySlides lazy" data-u="image" data-src="@item.Url" width="100%" height="auto" />
 							</li>
 							count++;
 						}
@@ -90,11 +90,32 @@
 		<h3 class="products-another-header">Các sản phẩm khác</h3>
 		<div class="products-another-content">
 			<ul >
-				<li class="products-another-items"><h3>San pham 1</h3></li>
-				<li class="products-another-items"><h3>San pham 1</h3></li>
-				<li class="products-another-items"><h3>San pham 1</h3></li>
-				<li class="products-another-items"><h3>San pham 1</h3></li>
-
+				@{
+					if (currentNode.Parent != null){
+						var parent = currentNode.Parent;
+						foreach (var item in parent.Children){
+							if (item != currentNode) {
+								var caseStudyImagesList = item.GetPropertyValue<string>("images").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
+								var caseStudyImagesCollection = Umbraco.TypedMedia(caseStudyImagesList).Where(x => x != null);
+								var image = caseStudyImagesCollection.FirstOrDefault();
+								<li class="products-another-items">
+									<a href="#">
+										<div class="image-lazy-loading">
+											<img class="lazy" data-src="@image.Url"/>
+										</div>
+										<div class="products-another-items-content">
+											<h4>@(item.Name)</h4>
+											<div class="prices-item">
+												<p>Giá: <span class="text"> @(item.GetPropertyValue<string>("gia"))</span></p>
+												</div>
+											<div class="type-item"><p>@(item.GetPropertyValue<string>("chatLieu"))</p></div>
+										</div>
+									</a>
+								</li>
+							}
+						}
+					}
+				}
 			</ul>
 		</div>
 	</div>
