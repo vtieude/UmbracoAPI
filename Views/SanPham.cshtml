@@ -29,16 +29,19 @@
 									</span>
 								</h3>
 							</header>
-							<a href="@product.Url"><img class="page-products-image" src="@url"></a>
-							<div class="page-products-detail">
-								<p><span>@(product.GetPropertyValue<string>("moTa"))</span></p>
-								<p><span class="page-products-price">Giá: @(product.GetPropertyValue<string>("gia")) </span></p>
+							<div class="page-products-item">
+								<a href="@product.Url"><img class="page-products-image" src="@url"></a>
+								<div class="page-products-detail">
+									<p>@(product.GetPropertyValue<string>("moTa"))</p>
+									<p><span class="page-products-price text">Giá: @(product.GetPropertyValue<string>("gia")) </span></p>
+								</div>
 							</div>
+							
 						</article>
 					</div>
-					if ((currentNode.Children.IndexOf(product) % 2 == 1 && currentNode.Children.IndexOf(product) != 0 )){
+					<!-- if ((currentNode.Children.IndexOf(product) % 2 == 1 && currentNode.Children.IndexOf(product) != 0 )){
 						<div class="clearfix"></div>
-					}
+					} -->
 				}
 			}
 		</div>

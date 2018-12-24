@@ -36,6 +36,7 @@
 	<div class="products">
 		<h2 class="heading text-center">Danh mục sản phẩm</h2>
 		<div class="row">
+			<ul>
 			@if (listItem != null) {
 				foreach( var sanphamitem in listItem) {
 					var images = sanphamitem.GetPropertyValue<int>("hinhAnh");
@@ -44,7 +45,7 @@
 					if (image != null) {
 						url = image.Url;
 					}
-					<div class="col-md-3 col-sm-6 product_item">
+					<li class="product_item">
 						<div class="box-image-text blog">
 							<div class="top">
 								<div class="image">
@@ -61,13 +62,14 @@
 								</p>
 							</div>
 						</div>
-					</div>
+					</li>
 					
-					if ((listItem.IndexOf(sanphamitem) == 3 ) || (listItem.IndexOf(sanphamitem) == 7 )){
+					<!-- if ((listItem.IndexOf(sanphamitem) == 3 ) || (listItem.IndexOf(sanphamitem) == 7 )){
 						<div class="clearfix"></div>
-					}
+					} -->
 				}
 			}
+			</ul>
 		</div>
 	</div>
 	<!-- End list products -->

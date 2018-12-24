@@ -78,9 +78,10 @@
 		</div>
 		<div class="items-products-content">
 			<div class="items-products-detail">
-				<p>@(currentNode.GetPropertyValue<string>("moTa"))</p>
-				<p>Giá: @(currentNode.GetPropertyValue<string>("gia"))</p>
-				<p>Liên hệ: @(homepage.GetPropertyValue<string>("soDienThoai"))</p>
+				<div class="items-header"><p>@(currentNode.GetPropertyValue<string>("moTa"))</p></div>
+				<div class="items"><p>Chất liệu: <span class="text">@(currentNode.GetPropertyValue<string>("chatLieu"))</span> </p></div>
+				<div class="items"><p>Giá: <span class="text">@(currentNode.GetPropertyValue<string>("gia"))</span></p></div>
+				<div class="items"><p>Liên hệ: <span class="text">@(homepage.GetPropertyValue<string>("soDienThoai"))</span></p></div>
 			</div>
 		</div>
 	</div>
@@ -88,18 +89,13 @@
 	<div class="products-another-items-content-page">
 		<h3 class="products-another-header">Các sản phẩm khác</h3>
 		<div class="products-another-content">
-			<div class="products-another-items">
-				<h3>San pham 1</h3>
-			</div>
-			<div class="products-another-items">
-				<h3>San pham 2</h3>
-			</div>
-			<div class="products-another-items">
-				<h3>San pham 3</h3>
-			</div>
-			<div class="products-another-items">
-				<h3>San pham 4</h3>
-			</div>
+			<ul >
+				<li class="products-another-items"><h3>San pham 1</h3></li>
+				<li class="products-another-items"><h3>San pham 1</h3></li>
+				<li class="products-another-items"><h3>San pham 1</h3></li>
+				<li class="products-another-items"><h3>San pham 1</h3></li>
+
+			</ul>
 		</div>
 	</div>
 </div>
