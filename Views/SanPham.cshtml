@@ -13,7 +13,7 @@
 	<div class="page-products row">
 		<div class="col-md-12 col-sm-12">
 			@{
-				foreach(var product in currentNode.Children.Take(8).ToList()) {
+				foreach(var product in currentNode.Children.ToList()) {
 					var images = product.GetPropertyValue<int>("hinhAnh");
 					var image = Umbraco.TypedMedia(images);
 					var url = String.Empty;
@@ -45,8 +45,8 @@
 				}
 			}
 		</div>
-		<div>
+		<!-- <div>
 			<a onclick="" href="javascript:void(0)" class="header-more">Xem thêm</a>
-		</div>
+		</div> -->
 	</div>
 </div>

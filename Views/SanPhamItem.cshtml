@@ -99,7 +99,7 @@
 								var caseStudyImagesCollection = Umbraco.TypedMedia(caseStudyImagesList).Where(x => x != null);
 								var image = caseStudyImagesCollection.FirstOrDefault();
 								<li class="products-another-items">
-									<a href="#">
+									<a href="@item.Url">
 										<div class="image-lazy-loading">
 											<img class="lazy" data-src="@image.Url"/>
 										</div>
