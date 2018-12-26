@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "bd020620c8bf0d39")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "cc1316b851eec01a")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 
 // FILE: models.generated.cs
@@ -321,12 +321,12 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// Tittle
+		/// Page Tittle
 		///</summary>
-		[ImplementPropertyType("tittle")]
-		public string Tittle
+		[ImplementPropertyType("pageTittle")]
+		public string PageTittle
 		{
-			get { return this.GetPropertyValue<string>("tittle"); }
+			get { return this.GetPropertyValue<string>("pageTittle"); }
 		}
 	}
 

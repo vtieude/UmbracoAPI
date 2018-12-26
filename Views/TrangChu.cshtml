@@ -49,12 +49,12 @@
 						<div class="box-image-text blog">
 							<div class="top">
 								<div class="image">
-									<a href="@sanphamitem.Url"><img data-src="@url" alt="@(sanphamitem.GetPropertyValue<string>("tittle"))" class="lazy img-responsive"></a>
+									<a href="@sanphamitem.Url"><img data-src="@url" alt="@(sanphamitem.GetPropertyValue<string>("pageTittle"))" class="lazy img-responsive"></a>
 								</div>
 							</div>
 							<div class="content">
-								<h4><a href="@sanphamitem.Url">@(sanphamitem.GetPropertyValue<string>("tittle"))</a></h4>
-								<p class="author-category">Sản xuất tại cơ sở Tấn Cường
+								<h4><a href="@sanphamitem.Url">@(sanphamitem.GetPropertyValue<string>("pageTittle"))</a></h4>
+								<p class="author-category">Sản xuất tại cơ sở <h4>Tấn Cường</h4>
 								</p>
 								<p class="intro">@(sanphamitem.GetPropertyValue<string>("moTa"))</p>
 								<p class="price">Giá: @(sanphamitem.GetPropertyValue<string>("gia"))</p>
