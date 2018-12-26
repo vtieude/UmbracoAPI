@@ -35,8 +35,10 @@
         <link href="/Css/StyleTrangChu.css" rel="stylesheet" type="text/css" media="all" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-        <title>@CurrentPage.pageTittle</title>
+        @{
+            string title = (homepage.Name == currentNode.Name ? "Tan Cuong - Mộc Mỹ Nghệ": CurrentPage.pageTittle);
+        }
+        <title>@title</title>
     </head>
     <body>
         <div class="container-fluid viewcontent">
